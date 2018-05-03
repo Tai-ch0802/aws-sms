@@ -16,7 +16,6 @@
             "Taichuchu\\AwsSms\\": "src/Sms"
         }
     },
-
     "extra": {
         "component": "package",
         "laravel": {
