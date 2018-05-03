@@ -39,6 +39,6 @@ class Sms
             ]
         ];
 
-        return $this->snsClient->publishAsync($arguments);
+        return $this->snsClient->publish($arguments);
     }
 }

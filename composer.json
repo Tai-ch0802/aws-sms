@@ -15,5 +15,13 @@
         "psr-4": {
             "Taichuchu\\AwsSms\\": "src/Sms"
         }
+    },
+    "extra": {
+        "component": "package",
+        "laravel": {
+            "providers": [
+                "Taichuchu\\AwsSms\\SmsProvider"
+            ]
+        }
     }
 }

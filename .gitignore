@@ -2,3 +2,4 @@
 /.idea
 /.vagrant
 .env
+composer.lock
