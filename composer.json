@@ -1,0 +1,19 @@
+{
+    "name": "taichuchu/aws-sms",
+    "description": "Use AWS SNS to send SMS message",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Tai",
+            "email": "chunchien.tai@104.com.tw"
+        }
+    ],
+    "require": {
+        "aws/aws-sdk-php-laravel": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Taichuchu\\AwsSms\\": "src/Sms"
+        }
+    }
+}
