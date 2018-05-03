@@ -20,7 +20,7 @@
         "component": "package",
         "laravel": {
             "providers": [
-                "Taichuchu\\AwsSms\\SmsProvider"
+                "Taichuchu\\AwsSms\\Sms\\SmsProvider"
             ]
         }
     }
