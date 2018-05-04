@@ -2,6 +2,8 @@
 namespace Taichuchu\AwsSms\Sms;
 
 use Aws\Sns\SnsClient;
+use function GuzzleHttp\Promise\settle;
+use Illuminate\Support\Facades\Log;
 
 class Sms
 {
@@ -40,5 +42,40 @@ class Sms
         ];
 
         return $this->snsClient->publish($arguments);
+    }
+
+    public function sendSmsBatch(Message $message, array $mobiles)
+    {
+        $arguments = [
+            'Message' => $message->content,
+            'PhoneNumber' => null,
+            'MessageAttributes' => [
+                'AWS.SNS.SMS.SenderID' => [
+                    'DataType' => 'String',
+                    'StringValue' =>  $this->from,
+                ],
+                'AWS.SNS.SMS.SMSType' => [
+                    'DataType' => 'String',
+                    'StringValue' =>  $message->type
+                ],
+                'AWS.SNS.SMS.MaxPrice' => [
+                    'DataType' => 'String',
+                    'StringValue' =>  $this->maxPriceUsed
+                ]
+            ]
+        ];
+
+        $promis = [];
+
+        foreach ($mobiles as $mobile) {
+            try {
+                $arguments['PhoneNumber'] = $mobile;
+                $promis[] = $this->snsClient->publishAsync($arguments);
+            } catch (\Exception $exception) {
+                Log::error($exception->getMessage());
+            }
+        }
+
+        return settle($promis)->wait(true);
     }
 }
